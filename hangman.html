@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hangman</title>
+	<link href="https://fonts.googleapis.com/css?family=Bahiana" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/styles/style.css">
+</head>
+
+
+<body>
+	<div id="everything">
+	<div class="container">
+		<div class="row">
+			<h1>Hangman!!!</h1>
+			<hr>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<div>
+					<img src="#" id="hangmanimage" class="hangmanstyling" width="300px" height="300px">
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<br>
+				<div class="row">
+					<div id="guessAnswer">
+					</div>
+				</div>
+				<div class="row">
+					<div id="wins"><h3>Your Wins are : 0 </h3></div>
+					<div id = "losses"><h3>Your Losses are : 0</h3></div>
+					<br><br><br><br><br><br>
+					<div id = "error"></div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="row">
+					<div class="centercontent">
+						<img src="assets/images/hangstat/minions0.png" id="hangmanstate" width="150px" height="350px">
+					</div>
+				</div>					
+			</div>
+		</div>
+	</div>
+	</div>
+
+
+	<script type="text/javascript">
+	//Define global elements and object with game data
+	var hangmanObject = {
+		answers: ["rick", "morty", "charlie", "kyle" , "cartman"],
+		imagepaths: ["assets/images/characterImages/rick.jpg", "assets/images/characterImages/morty.jpeg", "assets/images/characterImages/charlie.jpeg", "assets/images/characterImages/kyle.jpeg", "assets/images/characterImages/cartman.jpeg"],
+	}
+	//define elements for hangman image and update the page
+	var gamewins = 0;
+	var gamelosses = 0;
+	var losses = 0;
+	var guessedright=0;
+	var alreadyGuessed = [];
+	var i;
+	var myIndex;
+	var word;
+	var imagepath;
+	var wordLenght;
+	var mainDiv;
+	var guessedrightcount=0;
+
+	function resetGame () {
+		guessedrightcount = 0;
+		losses = 0;
+		guessedright=0;
+		alreadyGuessed = [];
+		myIndex=Math.floor(Math.random() * hangmanObject.answers.length);
+	    word = hangmanObject.answers[myIndex];
+	    imagepath=hangmanObject.imagepaths[myIndex];
+	    wordLenght=word.length;
+	    console.log ("Answer and imagepath are : " + word + " " + imagepath + " " + wordLenght);
+	    //pop up the image
+	    document.getElementById("hangmanimage").src = imagepath;
+
+
+	    mainDiv = document.getElementById("guessAnswer");
+	    while (mainDiv.firstChild) {
+	    	mainDiv.removeChild(mainDiv.firstChild);
+	    }
+		for (i=0;i<wordLenght;i++) {
+			var newdiv = document.createElement("div")
+			newdiv.id = "word-"+word[i]+i;
+			newdiv.className = "wordclass";
+			mainDiv.appendChild(newdiv);
+		}
+		document.getElementById("error").innerHTML = ""
+	}
+
+	resetGame();
+		console.log ("we have completed container creation")
+
+
+    document.onkeyup = function(event) {
+    	var userinput = event.key;
+    	if (losses < 6 && guessedrightcount !== wordLenght ) {
+    		guessedright=0
+    		if (alreadyGuessed.indexOf(userinput) !== -1) {
+    			document.getElementById("error").innerHTML = "<h4> Error : You have already selected the letter : " + userinput + "</h4>"
+	    		}
+	    	else {
+	    		document.getElementById("error").innerHTML = ""
+		    	for (i=0; i < wordLenght ; i++){
+		    		if (userinput === word[i]) {
+		    			var elementName = "word-"+userinput+i;
+		    			console.log("Element name is " + elementName);
+		    			var omg = document.getElementById(elementName);
+		    			omg.innerHTML = userinput;
+		    			guessedright++;
+		    			guessedrightcount++;
+		    			console.log ("guessed right loop count : " + guessedrightcount + "and world length is " + wordLenght);
+		    			alreadyGuessed.push(userinput);
+		    		}
+		    	}
+		    	if (guessedright == "0") {
+		    		losses++ ; 
+		    		var chancesLeft=6-losses;
+		    		if (chancesLeft === 0 ) {
+		    			document.getElementById("error").innerHTML = "<h1 id = 'losertag'> You Lose!! </h1>"
+		    		}
+		    		else {
+		    			document.getElementById("error").innerHTML = "<h4 > Tries left : " + chancesLeft + "</h4>"
+		    		}
+		    		
+		    		//console.log("Entered losses loop... losses are" + losses);
+		    		hangmanstate="assets/images/hangstat/minions"+losses+".png";
+		    		document.getElementById("hangmanstate").src = hangmanstate;
+		    	} 
+		    }
+    	} 
+    	else {
+    		console.log (losses);
+    		if (losses===6) {
+    			gamelosses++
+    		}
+    		else {
+    			gamewins++
+
+    		}
+      		document.getElementById("wins").innerHTML = "<h3 >Your Wins are : " + gamewins + "</h3>";
+    		document.getElementById("losses").innerHTML = "<h3>Your Losses are : " + gamelosses + "</h3>"
+    		resetGame();
+
+    		
+    	}
+    }
+
+    //Condition where you win and the image needs to change
+    // Condition where you lose and it changes the cpiture
+    // condition where game losses reach 7 and Game Over
+	</script>
+
+
+
+
+</body>
+</html>

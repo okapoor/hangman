@@ -1,0 +1,68 @@
+.wordclass {
+	width:50px;
+	height: 50px;
+	font-size: 25px;
+	text-align: center;
+	color: black;
+	display: inline-block;
+	margin: 5px 5px 5px 5px;
+	border-bottom: thick solid black;
+	padding: 5px 5px 5px 5px;
+	vertical-align: top;
+}
+
+
+h3 {
+	text-align: center;
+	font-family: 'Raleway', sans-serif;
+	font-size: 30px;
+	color: black;
+}
+
+#everything {
+	background-image: url(../images/coolbg4.jpg);
+	width: 1279px;
+	height: 600px;
+}
+
+.hangmanstyling {
+	box-shadow: 8px 8px 10px black;
+	border-radius: 10px;
+
+}
+
+.centercontent {
+	text-align: center;
+}
+
+#guessAnswer {
+	text-align: center;
+}
+
+#losertag {
+  	color: red;
+  	text-align: center;
+  	font-size: 90px;
+  	font-weight: bolder;
+}
+
+h4 {
+	color: black;
+	font-family: 'Roboto Slab', serif;
+	font-size:20px;
+	text-align: center;
+	background-color: #80bfff;
+	padding: 5px 5px 5px 5px;
+	border: thin solid black;
+	border-radius: 4px;
+
+}
+
+
+h1 {
+	font-family: 'Bahiana', cursive;
+  	color: black;
+  	text-align: center;
+  	font-size: 80px;
+  	font-weight: bolder;
+}
