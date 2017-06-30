@@ -81,7 +81,7 @@
 	    console.log ("Answer and imagepath are : " + word + " " + imagepath + " " + wordLenght);
 	    //pop up the image
 	    document.getElementById("hangmanimage").src = imagepath;
-
+	    document.getElementById("hangmanstate").src = "assets/images/hangstat/minions0.png";
 
 	    mainDiv = document.getElementById("guessAnswer");
 	    while (mainDiv.firstChild) {
@@ -112,20 +112,23 @@
 		    	for (i=0; i < wordLenght ; i++){
 		    		if (userinput === word[i]) {
 		    			var elementName = "word-"+userinput+i;
-		    			console.log("Element name is " + elementName);
 		    			var omg = document.getElementById(elementName);
 		    			omg.innerHTML = userinput;
 		    			guessedright++;
 		    			guessedrightcount++;
-		    			console.log ("guessed right loop count : " + guessedrightcount + "and world length is " + wordLenght);
 		    			alreadyGuessed.push(userinput);
+		    			console.log ("guessed right loop count : " + guessedrightcount + "and world length is " + wordLenght);
+		    			if (guessedrightcount == wordLenght) {
+		    				console.log ("We are in grloop");
+		    				document.getElementById("error").innerHTML = "<h3 id = 'losertag'> You Win! Press any key to reset the game. </h5>";
+		    			}
 		    		}
 		    	}
 		    	if (guessedright == "0") {
 		    		losses++ ; 
 		    		var chancesLeft=6-losses;
 		    		if (chancesLeft === 0 ) {
-		    			document.getElementById("error").innerHTML = "<h1 id = 'losertag'> You Lose!! </h1>"
+		    			document.getElementById("error").innerHTML = "<h3 id = 'losertag'> You Lose! Press any key to reset the game. </h5>"
 		    		}
 		    		else {
 		    			document.getElementById("error").innerHTML = "<h4 > Tries left : " + chancesLeft + "</h4>"
