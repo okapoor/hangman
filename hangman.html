@@ -120,7 +120,7 @@
 		    			console.log ("guessed right loop count : " + guessedrightcount + "and world length is " + wordLenght);
 		    			if (guessedrightcount == wordLenght) {
 		    				console.log ("We are in grloop");
-		    				document.getElementById("error").innerHTML = "<h3 id = 'losertag'> You Win! Press any key to reset the game. </h5>";
+		    				document.getElementById("error").innerHTML = "<h4 id = 'losertag'> You Win! Press any key to reset the game. </h5>";
 		    			}
 		    		}
 		    	}
@@ -128,7 +128,7 @@
 		    		losses++ ; 
 		    		var chancesLeft=6-losses;
 		    		if (chancesLeft === 0 ) {
-		    			document.getElementById("error").innerHTML = "<h3 id = 'losertag'> You Lose! Press any key to reset the game. </h5>"
+		    			document.getElementById("error").innerHTML = "<h4 id = 'losertag'> You Lose! Press any key to reset the game. </h5>"
 		    		}
 		    		else {
 		    			document.getElementById("error").innerHTML = "<h4 > Tries left : " + chancesLeft + "</h4>"
